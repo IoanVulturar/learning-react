@@ -1,16 +1,20 @@
-import { userNameValidator, passwordValidator } from "./validator"
+// import { userNameValidator, passwordValidator } from "./validator"
+import { userLogin } from './requests'
 
-export const isUserValid = ({ username, password }) => {
-    const adminUser = {
-        username: "nelu",
-        password: "aA1?"
-    }
+export const isUserValid = async ({ username, password }) => {
+    // if (!userNameValidator(username) || !passwordValidator(password)) {
+    //     return false
+    // }
+    let adminUser = null
 
-    if (!userNameValidator(username) || !passwordValidator(password)) {
+    try {
+        adminUser = await userLogin(username, password)
+    } catch (err) {
+        console.log(err)
         return false
     }
 
-    if (username === adminUser.username && password === adminUser.password) {
+    if (username === adminUser.userName || password === adminUser.password) {
         return true
     }
     return false

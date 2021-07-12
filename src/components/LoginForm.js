@@ -7,12 +7,17 @@ export default function LoginForm() {
     const history = useHistory()
     const [loginDetails, setLoginDetails] = useState({ username: '', password: '' })
 
-    const submitHandler = (e) => {
+    const submitHandler = async (e) => {
         e.preventDefault()
 
-        if (isUserValid(loginDetails)) {
-            history.push({ pathname: "/welcome", state: { username: loginDetails.username } })
-        } else {
+        try {
+            const isValid = await isUserValid(loginDetails)
+            if (isValid) {
+                history.push({ pathname: "/welcome", state: { username: loginDetails.username } })
+            } else {
+                setError('INVALID CREDENTIALS')
+            }
+        } catch (err) {
             setError('INVALID CREDENTIALS')
         }
     }

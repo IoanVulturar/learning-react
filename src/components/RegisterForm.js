@@ -37,7 +37,7 @@ const RegisterForm = ({ login, error }) => {
                         </div>
                         <div className="">
                             <label htmlFor="email" className="sr-only">Email: </label><br />
-                            <input type="email" className="form-control" name="email" id="username"
+                            <input type="email" className="form-control" name="email" id="email"
                                 placeholder="email" required
                                 onChange={(e) => setDetails({ ...details, email: e.target.value })}
                                 value={details.email} />
