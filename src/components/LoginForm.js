@@ -1,16 +1,20 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
-import loginAuth from '../utils/loginAuth'
+import { Link, useHistory } from 'react-router-dom'
+import { isUserValid } from '../utils/authentication'
 
-const LoginForm = ({ login, error }) => {
-    const [details, setDetails] = useState({
-        username: '', password: ''
-    })
+export default function LoginForm() {
+    const [error, setError] = useState('')
+    const history = useHistory()
+    const [loginDetails, setLoginDetails] = useState({ username: '', password: '' })
 
     const submitHandler = (e) => {
         e.preventDefault()
 
-        login(details)
+        if (isUserValid(loginDetails)) {
+            history.push({ pathname: "/welcome", state: { username: loginDetails.username } })
+        } else {
+            setError('INVALID CREDENTIALS')
+        }
     }
 
     return (
@@ -28,22 +32,22 @@ const LoginForm = ({ login, error }) => {
                             <h2 className="h3 font-weight-light">Sign into your account</h2>
                         </div>
 
-                        {(error !== '') ? (<div className="error">{error}</div>) : ''}
+                        {(error !== '') ? (<div className="alert-warning p-2 mt-3">{error}</div>) : ''}
 
                         <div className="">
                             <label htmlFor="username" className="sr-only">Username: </label><br />
                             <input type="text" className="form-control" name="username" id="username"
                                 placeholder="username" required autoFocus
-                                onChange={(e) => setDetails({ ...details, username: e.target.value })}
-                                value={details.username} />
+                                onChange={(e) => setLoginDetails({ ...loginDetails, username: e.target.value })}
+                                value={loginDetails.username} />
                         </div>
 
                         <div className="">
                             <label htmlFor="password" className="sr-only">Password: </label><br />
                             <input type="password" className="form-control" name="password" id="password"
                                 placeholder="password" required
-                                onChange={(e) => setDetails({ ...details, password: e.target.value })}
-                                value={details.password} />
+                                onChange={(e) => setLoginDetails({ ...loginDetails, password: e.target.value })}
+                                value={loginDetails.password} />
                         </div>
 
                         <div className="checkbox mt-3">
@@ -68,5 +72,3 @@ const LoginForm = ({ login, error }) => {
         </div >
     )
 }
-
-export default LoginForm

@@ -1,7 +1,10 @@
 import React from 'react'
+import { useLocation } from 'react-router-dom'
 
-const Welcome = ({ username }) => {
-    console.log(username)
+const Welcome = () => {
+    const location = useLocation()
+    const username = location.state.username
+
     return (
         <div >
             <div className="container"
