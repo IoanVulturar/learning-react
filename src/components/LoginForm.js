@@ -1,37 +1,37 @@
-import React, { useState } from 'react'
-import { Link, useHistory } from 'react-router-dom'
-import { isUserValid } from '../utils/authentication'
+import React, { useState } from 'react';
+import { Link, useHistory } from 'react-router-dom';
+import { isUserValid } from '../utils/authentication';
 
 export default function LoginForm() {
-    const [error, setError] = useState('')
-    const history = useHistory()
-    const [loginDetails, setLoginDetails] = useState({ username: '', password: '' })
+    const [error, setError] = useState('');
+    const history = useHistory();
+    const [loginDetails, setLoginDetails] = useState({ username: '', password: '' });
 
     const submitHandler = async (e) => {
-        e.preventDefault()
+        e.preventDefault();
 
         try {
-            const isValid = await isUserValid(loginDetails)
+            const isValid = await isUserValid(loginDetails);
             if (isValid) {
-                history.push({ pathname: "/welcome", state: { username: loginDetails.username } })
+                history.push({ pathname: '/welcome', state: { username: loginDetails.username } });
             } else {
-                setError('INVALID CREDENTIALS')
+                setError('INVALID CREDENTIALS');
             }
         } catch (err) {
-            setError('INVALID CREDENTIALS')
+            setError('INVALID CREDENTIALS');
         }
-    }
+    };
+
+    const onChangeHandler = (e) => {
+        setLoginDetails({ ...loginDetails, [e.target.id]: e.target.value });
+    };
 
     return (
-        <div className="container"
-            style={{
-                display: "flex", flexDirection: "column", height: "100vh",
-                justifyContent: "center", alignItems: "center"
-            }}>
-            <div className="card mt-5"
-                style={{ width: "500px", margin: "auto" }}>
+        <div className="container">
+            <div className="card mt-5 form-width">
                 <div className="card-body text-center">
-                    <form onSubmit={submitHandler} >
+
+                    <form onSubmit={submitHandler}>
 
                         <div className="mt-1">
                             <h2 className="h3 font-weight-light">Sign into your account</h2>
@@ -40,19 +40,34 @@ export default function LoginForm() {
                         {(error !== '') ? (<div className="alert-warning p-2 mt-3">{error}</div>) : ''}
 
                         <div className="">
-                            <label htmlFor="username" className="sr-only">Username: </label><br />
-                            <input type="text" className="form-control" name="username" id="username"
-                                placeholder="username" required autoFocus
-                                onChange={(e) => setLoginDetails({ ...loginDetails, username: e.target.value })}
-                                value={loginDetails.username} />
+                            <label htmlFor="username" className="sr-only">Username: </label>
+                            <br />
+                            <input
+                                type="text"
+                                className="form-control"
+                                name="username"
+                                id="username"
+                                placeholder="username"
+                                required
+                                autoFocus
+                                onChange={onChangeHandler}
+                                value={loginDetails.username}
+                            />
                         </div>
 
                         <div className="">
-                            <label htmlFor="password" className="sr-only">Password: </label><br />
-                            <input type="password" className="form-control" name="password" id="password"
-                                placeholder="password" required
-                                onChange={(e) => setLoginDetails({ ...loginDetails, password: e.target.value })}
-                                value={loginDetails.password} />
+                            <label htmlFor="password" className="sr-only">Password: </label>
+                            <br />
+                            <input
+                                type="password"
+                                className="form-control"
+                                name="password"
+                                id="password"
+                                placeholder="password"
+                                required
+                                onChange={onChangeHandler}
+                                value={loginDetails.password}
+                            />
                         </div>
 
                         <div className="checkbox mt-3">
@@ -67,13 +82,13 @@ export default function LoginForm() {
                         </div>
 
                         <div className="mt-3">
-                            Don't have an account?
+                            Don&apos;t have an account?
                             <Link to="/register" className="ml-2">Register here</Link>
                         </div>
 
-                    </form >
+                    </form>
                 </div>
-            </div >
-        </div >
-    )
+            </div>
+        </div>
+    );
 }

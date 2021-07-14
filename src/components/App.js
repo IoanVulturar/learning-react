@@ -1,9 +1,10 @@
-import React from 'react'
+import React from 'react';
 import { Switch, Route } from "react-router-dom";
+import '../css/style.css';
 
-import LoginForm from './LoginForm'
+import LoginForm from './LoginForm';
 import RegisterForm from './RegisterForm';
-import Welcome from './Welcome'
+import Welcome from './Welcome';
 import NotFound from './NotFound';
 
 export default function App() {

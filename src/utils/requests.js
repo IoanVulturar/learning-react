@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios from 'axios';
 
 export const userLogin = async (username, password) => {
     try {
@@ -6,9 +6,9 @@ export const userLogin = async (username, password) => {
             'http://localhost:5000/login',
             { userName: username, password: password },
             { headers: { 'Content-Type': 'application/json' } }
-        )
-        return response.data.user
+        );
+        return response.data.user;
     } catch (err) {
-        return Promise.reject('User Not Found -> ' + err)
+        return Promise.reject('User Not Found -> ' + err);
     }
 }

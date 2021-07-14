@@ -1,0 +1,8 @@
+input {
+  text-align: center;
+}
+
+.form-width { 
+  width: 500px;
+  margin: auto;
+}

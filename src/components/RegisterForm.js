@@ -1,25 +1,23 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
-const RegisterForm = ({ login, error }) => {
+export default function RegisterForm({ login, error }) {
     const [details, setDetails] = useState({
         username: '', email: '', password: '', phoneNumber: '', role: ''
-    })
+    });
 
     const submitHandler = (e) => {
-        e.preventDefault()
-
-        login(details)
+        e.preventDefault();
+        login(details);
     }
 
+    const onChangeHandler = (e) => {
+        setDetails({ ...details, [e.target.id]: e.target.value });
+    };
+
     return (
-        <div className="container"
-            style={{
-                display: "flex", flexDirection: "column", height: "100vh",
-                justifyContent: "center", alignItems: "center"
-            }}>
-            <div className="card mt-5"
-                style={{ width: "500px", margin: "auto" }}>
+        <div className="container">
+            <div className="card mt-5 form-width">
                 <div className="card-body text-center">
                     <form onSubmit={submitHandler} >
                         <div className="mt-1">
@@ -32,28 +30,28 @@ const RegisterForm = ({ login, error }) => {
                             <label htmlFor="username" className="sr-only">Username: </label><br />
                             <input type="text" className="form-control" name="username" id="username"
                                 placeholder="username" required autoFocus
-                                onChange={(e) => setDetails({ ...details, username: e.target.value })}
+                                onChange={onChangeHandler}
                                 value={details.username} />
                         </div>
                         <div className="">
                             <label htmlFor="email" className="sr-only">Email: </label><br />
                             <input type="email" className="form-control" name="email" id="email"
                                 placeholder="email" required
-                                onChange={(e) => setDetails({ ...details, email: e.target.value })}
+                                onChange={onChangeHandler}
                                 value={details.email} />
                         </div>
                         <div className="">
                             <label htmlFor="phoneNumber" className="sr-only">Email: </label><br />
                             <input type="text" className="form-control" name="phoneNumber" id="phoneNumber"
                                 placeholder="phone number" required
-                                onChange={(e) => setDetails({ ...details, phoneNumber: e.target.value })}
+                                onChange={onChangeHandler}
                                 value={details.phoneNumber} />
                         </div>
                         <div className="">
                             <label htmlFor="password" className="sr-only">Password: </label><br />
                             <input type="password" className="form-control" name="password" id="password"
                                 placeholder="password" required
-                                onChange={(e) => setDetails({ ...details, password: e.target.value })}
+                                onChange={onChangeHandler}
                                 value={details.password} />
                         </div>
 
@@ -61,7 +59,7 @@ const RegisterForm = ({ login, error }) => {
                             <label htmlFor="role" className="sr-only">Role: </label><br />
                             <input type="text" className="form-control" name="role" id="role"
                                 placeholder="role" required
-                                onChange={(e) => setDetails({ ...details, role: e.target.value })}
+                                onChange={onRoleChangeHandler}
                                 value={details.role} />
                         </div>
 
@@ -78,5 +76,3 @@ const RegisterForm = ({ login, error }) => {
         </div >
     )
 }
-
-export default RegisterForm

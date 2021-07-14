@@ -1,11 +1,7 @@
-const NotFound = () => {
+export default function NotFound() {
     return (
         <div >
-            <div className="container"
-                style={{
-                    display: "flex", flexDirection: "column", height: "100vh",
-                    justifyContent: "center", alignItems: "center"
-                }}>
+            <div className="container">
                 <div className="card mt-5"
                     style={{ width: "500px", margin: "auto" }}>
                     <div className="card-body text-center">
@@ -17,5 +13,3 @@ const NotFound = () => {
 
     )
 }
-
-export default NotFound
