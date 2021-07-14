@@ -7,13 +7,13 @@ export default function LoginForm() {
     const history = useHistory()
     const [loginDetails, setLoginDetails] = useState({ username: '', password: '' })
 
-    const submitHandler = async (e) => {
+    const onSubmit = async (e) => {
         e.preventDefault()
 
         try {
             const isValid = await isUserValid(loginDetails)
             if (isValid) {
-                history.push({ pathname: "/welcome", state: { username: loginDetails.username } })
+                history.push({ pathname: "/dashboard", state: { loginDetails: isValid } })
             } else {
                 setError('INVALID CREDENTIALS')
             }
@@ -31,7 +31,8 @@ export default function LoginForm() {
             <div className="card mt-5"
                 style={{ width: "500px", margin: "auto" }}>
                 <div className="card-body text-center">
-                    <form onSubmit={submitHandler} >
+
+                    <form onSubmit={onSubmit} >
 
                         <div className="mt-1">
                             <h2 className="h3 font-weight-light">Sign into your account</h2>

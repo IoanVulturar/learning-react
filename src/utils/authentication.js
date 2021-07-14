@@ -15,8 +15,7 @@ export const isUserValid = async ({ username, password }) => {
     }
 
     if (username === adminUser.userName || password === adminUser.password) {
-        return true
+        return adminUser
     }
     return false
 }
-

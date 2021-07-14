@@ -1,10 +1,12 @@
 import React from 'react'
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Router } from "react-router-dom";
 
 import LoginForm from './LoginForm'
 import RegisterForm from './RegisterForm';
-import Welcome from './Welcome'
-import NotFound from './NotFound';
+import Dashboard from './Dashboard'
+import NotFound from './NotFound'
+import Profile from './Profile'
+import Search from './Search'
 
 export default function App() {
     return (
@@ -12,9 +14,11 @@ export default function App() {
             <Switch>
                 <Route path="/" exact component={LoginForm} />
                 <Route path="/register" component={RegisterForm} />
-                <Route path="/welcome">
-                    <Welcome />
+                <Route path="/dashboard">
+                    <Dashboard />
                 </Route>
+                <Route path="/profile" component={Profile} />
+                <Route path="/search" component={Search} />
                 <Route component={NotFound} />
             </Switch>
         </div>
