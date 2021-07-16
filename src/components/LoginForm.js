@@ -10,34 +10,26 @@ export default function LoginForm() {
 		password: '',
 	})
 
-	const submitHandler = async (e) => {
-		e.preventDefault()
+    const onSubmit = async (e) => {
+        e.preventDefault()
 
-		try {
-			const isValid = await isUserValid(loginDetails)
-			if (isValid) {
-				history.push({
-					pathname: '/welcome',
-					state: { username: loginDetails.username },
-				})
-			} else {
-				setError('INVALID CREDENTIALS')
-			}
-		} catch (err) {
-			setError('INVALID CREDENTIALS')
-		}
-	}
-
-	const onChangeHandler = (e) => {
-		const { id, value } = e.target
-		setLoginDetails({ ...loginDetails, [id]: value })
-	}
+        try {
+            const isValid = await isUserValid(loginDetails)
+            if (isValid) {
+                history.push({ pathname: "/dashboard", state: { loginDetails: isValid } })
+            } else {
+                setError('INVALID CREDENTIALS')
+            }
+        } catch (err) {
+            setError('INVALID CREDENTIALS')
+        }
+    }
 
 	return (
 		<div className='container'>
 			<div className='card mt-5 form-width'>
 				<div className='card-body text-center'>
-					<form onSubmit={submitHandler}>
+					<form onSubmit={onSubmit}>
 						<div className='mt-1'>
 							<h2 className='h3 font-weight-light'>Sign into your account</h2>
 						</div>

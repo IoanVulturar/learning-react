@@ -20,14 +20,14 @@ export default function RegisterForm({ login, error }) {
 		setDetails({ ...details, [id]: value })
 	}
 
-	return (
-		<div className='container'>
-			<div className='card mt-5 form-width'>
-				<div className='card-body text-center'>
-					<form onSubmit={submitHandler}>
-						<div className='mt-1'>
-							<h2 className='h3 font-weight-light'>Create account</h2>
-						</div>
+    return (
+        <div className="container">
+            <div className="card mt-5 form-width">
+                <div className="card-body text-center">
+                    <form onSubmit={submitHandler} >
+                        <div className="mt-1">
+                            <h2 className="h3 font-weight-light">Create account</h2>
+                        </div>
 
 						{error !== '' ? <div className='error'>{error}</div> : ''}
 

@@ -1,7 +1,7 @@
 import { userLogin } from './requests'
 
 export const isUserValid = async ({ username, password }) => {
-	let adminUser = null
+    let adminUser = null
 
 	try {
 		adminUser = await userLogin(username, password)
@@ -10,8 +10,8 @@ export const isUserValid = async ({ username, password }) => {
 		return false
 	}
 
-	if (username === adminUser.userName || password === adminUser.password) {
-		return true
-	}
-	return false
+    if (username === adminUser.userName || password === adminUser.password) {
+        return adminUser
+    }
+    return false
 }
