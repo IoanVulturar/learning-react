@@ -1,10 +1,6 @@
-// import { userNameValidator, passwordValidator } from "./validator"
 import { userLogin } from './requests'
 
 export const isUserValid = async ({ username, password }) => {
-    // if (!userNameValidator(username) || !passwordValidator(password)) {
-    //     return false
-    // }
     let adminUser = null
 
     try {

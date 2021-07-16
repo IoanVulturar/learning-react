@@ -1,9 +1,13 @@
 import React, { useState } from 'react'
+import { useHistory } from 'react-router-dom'
 import { updateUser } from '../utils/requests'
 
 export default function Profile({ userDetails }) {
-    const { userName, password, email, phoneNumber, role } = userDetails
+    const history = useHistory()
+    const [error, setError] = useState('')
+    const { _id, userName, password, email, phoneNumber, role } = userDetails
     const [updateDetails, setUpdateDetails] = useState({
+        id: _id,
         userName: userName,
         password: password,
         email: email,
@@ -15,14 +19,14 @@ export default function Profile({ userDetails }) {
         event.preventDefault()
 
         try {
-            const isValid = await updateUser(updateDetails)
-            if (isValid) {
-                // history.push({ pathname: "/dashboard", state: { loginDetails: isValid } })
+            const message = await updateUser(updateDetails)
+            if (message) {
+                setError('User profile has been updated!')
             } else {
-                // setError('INVALID CREDENTIALS')
+                setError('Update details are not valid')
             }
         } catch (err) {
-            // setError('INVALID CREDENTIALS')
+            setError(err)
         }
     }
 
@@ -35,6 +39,8 @@ export default function Profile({ userDetails }) {
                     <div className="mt-1">
                         <h2>Profile</h2>
                     </div>
+
+                    {(error !== '') ? (<div className="alert-warning p-2 mt-3">{error}</div>) : ''}
 
                     <form onSubmit={onSubmit}>
 
