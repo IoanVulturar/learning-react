@@ -11,17 +11,15 @@ import Search from './Search'
 
 export default function App() {
     return (
-        <div className="App">
-            <Switch>
-                <Route path="/" exact component={LoginForm} />
-                <Route path="/register" component={RegisterForm} />
-                <Route path="/dashboard">
-                    <Dashboard />
-                </Route>
-                <Route path="/profile" component={Profile} />
-                <Route path="/search" component={Search} />
-                <Route component={NotFound} />
-            </Switch>
-        </div>
+        <Switch>
+            <Route path="/" exact component={LoginForm} />
+            <Route path="/register" component={RegisterForm} />
+            <Route path="/dashboard">
+                <Dashboard />
+            </Route>
+            <Route path="/profile" component={Profile} />
+            <Route path="/search" component={Search} />
+            <Route component={NotFound} />
+        </Switch>
     )
 }

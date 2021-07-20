@@ -1,18 +1,38 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { registerUser } from "../utils/requests";
 
-export default function RegisterForm({ login, error }) {
+export default function RegisterForm() {
+	const [info, setInfo] = useState('')
 	const [details, setDetails] = useState({
-		username: '',
+		userName: '',
 		email: '',
 		password: '',
 		phoneNumber: '',
 		role: '',
 	})
 
-	const submitHandler = (e) => {
+	const onSubmit = async (e) => {
 		e.preventDefault()
-		login(details)
+
+		try {
+			const isRegistered = await registerUser(details)
+			if (isRegistered) {
+				setInfo(isRegistered)
+				setDetails({
+					userName: '',
+					email: '',
+					password: '',
+					phoneNumber: '',
+					role: ''
+				})
+				setTimeout(() => { setInfo('') }, 3000)
+			} else {
+				setInfo('Invalid credentials')
+			}
+		} catch (err) {
+			setInfo('Invalid credentials')
+		}
 	}
 
 	const onChangeHandler = (e) => {
@@ -20,32 +40,32 @@ export default function RegisterForm({ login, error }) {
 		setDetails({ ...details, [id]: value })
 	}
 
-    return (
-        <div className="container">
-            <div className="card mt-5 form-width">
-                <div className="card-body text-center">
-                    <form onSubmit={submitHandler} >
-                        <div className="mt-1">
-                            <h2 className="h3 font-weight-light">Create account</h2>
-                        </div>
+	return (
+		<div className="container">
+			<div className="card mt-5 form-width">
+				<div className="card-body text-center">
+					<form onSubmit={onSubmit} >
+						<div className="mt-1">
+							<h2 className="h3 font-weight-light">Create account</h2>
+						</div>
 
-						{error !== '' ? <div className='error'>{error}</div> : ''}
+						{info !== '' ? <div className='alert-primary p-2 mt-3'>{info}</div> : ''}
 
 						<div className=''>
-							<label htmlFor='username' className='sr-only'>
-								Username:{' '}
+							<label htmlFor='userName' className='sr-only'>
+								userName:{' '}
 							</label>
 							<br />
 							<input
 								type='text'
 								className='form-control'
-								name='username'
-								id='username'
-								placeholder='username'
+								name='userName'
+								id='userName'
+								placeholder='userName'
 								required
 								autoFocus
 								onChange={onChangeHandler}
-								value={details.username}
+								value={details.userName}
 							/>
 						</div>
 						<div className=''>

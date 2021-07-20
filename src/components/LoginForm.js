@@ -10,20 +10,25 @@ export default function LoginForm() {
 		password: '',
 	})
 
-    const onSubmit = async (e) => {
-        e.preventDefault()
+	const onSubmit = async (e) => {
+		e.preventDefault()
 
-        try {
-            const isValid = await isUserValid(loginDetails)
-            if (isValid) {
-                history.push({ pathname: "/dashboard", state: { loginDetails: isValid } })
-            } else {
-                setError('INVALID CREDENTIALS')
-            }
-        } catch (err) {
-            setError('INVALID CREDENTIALS')
-        }
-    }
+		try {
+			const isValid = await isUserValid(loginDetails)
+			if (isValid) {
+				history.push({ pathname: "/dashboard", state: { loginDetails: isValid } })
+			} else {
+				setError('INVALID CREDENTIALS')
+			}
+		} catch (err) {
+			setError('INVALID CREDENTIALS')
+		}
+	}
+
+	const onChangeHandler = (e) => {
+		const { id, value } = e.target
+		setLoginDetails({ ...loginDetails, [id]: value })
+	}
 
 	return (
 		<div className='container'>
