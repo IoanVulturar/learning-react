@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { updateUser } from '../utils/requests'
 
 export default function Profile({ userDetails }) {
-    const [error, setError] = useState('')
+    const [userMessage, setUserMessage] = useState('')
     const { _id, userName, password, email, phoneNumber, role } = userDetails
     const [updateDetails, setUpdateDetails] = useState({
         id: _id,
@@ -17,14 +17,10 @@ export default function Profile({ userDetails }) {
         event.preventDefault()
 
         try {
-            const message = await updateUser(updateDetails)
-            if (message) {
-                setError('User profile has been updated!')
-            } else {
-                setError('Update details are not valid')
-            }
+            await updateUser(updateDetails)
+            setUserMessage('User profile has been updated!')
         } catch (err) {
-            setError(err)
+            setUserMessage('Update details are not valid')
         }
     }
 
@@ -42,7 +38,7 @@ export default function Profile({ userDetails }) {
                         <h2>Profile</h2>
                     </div>
 
-                    {(error !== '') ? (<div className="alert-warning p-2 mt-3">{error}</div>) : ''}
+                    {(userMessage !== '') ? (<div className="alert-warning p-2 mt-3">{userMessage}</div>) : ''}
 
                     <form onSubmit={onSubmit}>
 
