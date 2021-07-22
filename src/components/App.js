@@ -2,22 +2,34 @@ import React from 'react'
 import { Switch, Route } from 'react-router-dom'
 import '../css/style.css'
 
-import LoginForm from './LoginForm'
-import RegisterForm from './RegisterForm'
-import Welcome from './Welcome'
-import NotFound from './NotFound'
+import LoginForm from '../views/LoginForm'
+import RegisterForm from '../views/RegisterForm';
+import Dashboard from './Dashboard'
+import NotFound from '../views/NotFound'
+import Profile from './Profile'
+import Search from './Search'
 
 export default function App() {
-	return (
-		<div className='App'>
-			<Switch>
-				<Route path='/' exact component={LoginForm} />
-				<Route path='/register' component={RegisterForm} />
-				<Route path='/welcome'>
-					<Welcome />
-				</Route>
-				<Route component={NotFound} />
-			</Switch>
-		</div>
-	)
+    return (
+        <Switch>
+            <Route path="/" exact>
+                <LoginForm />
+            </Route>
+            <Route path="/register">
+                <RegisterForm />
+            </Route>
+            <Route path="/dashboard">
+                <Dashboard />
+            </Route>
+            <Route path="/profile" >
+                <Profile />
+            </Route>
+            <Route path="/search">
+                <Search />
+            </Route>
+            <Route>
+                <NotFound />
+            </Route>
+        </Switch >
+    )
 }
