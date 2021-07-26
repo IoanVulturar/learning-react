@@ -1,23 +1,28 @@
 import React, { useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import { updateUser } from '../utils/requests'
+import { setUserDetailsAction } from '../redux/actions/userActions'
 
-export default function Profile({ userDetails }) {
+export default function Profile() {
+    const userDetails = useSelector(state => state.user)
     const [userMessage, setUserMessage] = useState('')
-    const { _id, userName, password, email, phoneNumber, role } = userDetails
+    const { id, userName, password, email, phoneNumber, role } = userDetails
     const [updateDetails, setUpdateDetails] = useState({
-        id: _id,
+        id,
         userName,
         password,
         email,
         phoneNumber,
         role
     })
+    const dispatch = useDispatch()
 
     const onSubmit = async (event) => {
         event.preventDefault()
 
         try {
             await updateUser(updateDetails)
+            dispatch(setUserDetailsAction(updateDetails))
             setUserMessage('User profile has been updated!')
         } catch (err) {
             setUserMessage('Update details are not valid')

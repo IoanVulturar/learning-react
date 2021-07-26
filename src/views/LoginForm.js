@@ -1,6 +1,9 @@
 import React, { useState } from 'react'
 import { Link, useHistory } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
 import { isUserValid } from '../utils/authentication'
+import { setUserDetailsAction } from '../redux/actions/userActions'
+import { loggingAction } from '../redux/actions/loggingActions'
 
 export default function LoginForm() {
 	const [error, setError] = useState('')
@@ -9,14 +12,17 @@ export default function LoginForm() {
 		username: '',
 		password: '',
 	})
+	const dispatch = useDispatch()
 
 	const onSubmit = async (e) => {
 		e.preventDefault()
 
 		try {
-			const isValid = await isUserValid(loginDetails)
-			if (isValid) {
-				history.push({ pathname: "/dashboard", state: { loginDetails: isValid } })
+			const user = await isUserValid(loginDetails)
+			if (user) {
+				dispatch(loggingAction())
+				dispatch(setUserDetailsAction(user))
+				history.push('/dashboard')
 			} else {
 				setError('INVALID CREDENTIALS')
 			}

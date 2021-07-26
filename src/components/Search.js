@@ -1,33 +1,32 @@
 import React, { useEffect, useState } from 'react'
 import { getUsers } from '../utils/requests'
 import UserTable from "./UserTable"
+import { useDispatch } from 'react-redux'
+import { setUsersListAction } from '../redux/actions/usersListAction'
+import { searchAction } from '../redux/actions/searchAction'
 
 export default function Search() {
     const [searchTerm, setSearchTerm] = useState('')
-    const [userList, setUserList] = useState([])
+    const dispatch = useDispatch()
 
-    const initTable = async () => {
+    const initTableList = async () => {
         try {
-            const users = await getUsers()
-            setUserList(users)
+            const usersList = await getUsers()
+            dispatch(setUsersListAction(usersList))
         } catch (err) {
             console.error('Show users error -> ' + err);
         }
     }
-
+    
     useEffect(() => {
-        initTable()
+        initTableList()
     }, [])
 
-    const getFilteredList = () => {
-        return userList.filter(user =>
-            user.userName.toLowerCase().includes(searchTerm.toLowerCase())
-        )
-    }
-
     const onChangeHandler = (e) => {
+        const term = e.target.value
         e.preventDefault()
-        setSearchTerm(e.target.value)
+        dispatch(searchAction(term))
+        setSearchTerm(term)
     }
 
     return (
@@ -44,7 +43,7 @@ export default function Search() {
                     value={searchTerm}
                 />
             </div>
-            <UserTable userList={userList} showUsers={getFilteredList()} removeUser={setUserList} />
+            <UserTable />
         </div>
     )
 }

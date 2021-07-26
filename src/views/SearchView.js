@@ -1,11 +1,11 @@
 import Navbar from '../components/Navbar'
 import Search from '../components/Search'
 
-export default function SearchView({ userDetails }) {
+export default function SearchView() {
 
   return (
     <div>
-      <Navbar username={userDetails.userName} />
+      <Navbar />
       <Search />
     </div>
   )

@@ -1,11 +1,19 @@
+import { useSelector } from 'react-redux'
 import TableRow from "./TableRow"
 import TableHeader from "./TableHeader"
 
-export default function UserTable({ userList, showUsers, removeUser }) {
-  const rows = showUsers.map(user =>
-    <TableRow key={user.id} user={user} userList={userList} removeUser={removeUser} />
+export default function UserTable() {
+  const searchTerm = useSelector(state => state.searchTerm.value)
+  const usersList = useSelector(state => state.usersList.users)
+  
+  const filteredUsers = usersList.filter(user =>
+    user.userName.toLowerCase().includes(searchTerm.toLowerCase())
   )
-
+  
+  const rows = filteredUsers.map(user =>
+    <TableRow key={user.id} user={user} />
+  )
+  
   return (
     <div>
       <table className="table table-striped">

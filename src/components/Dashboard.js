@@ -1,27 +1,25 @@
 import React from 'react'
-import { useLocation, Route, Switch, BrowserRouter } from 'react-router-dom'
+import { Route, Switch, BrowserRouter } from 'react-router-dom'
 import LoginForm from '../views/LoginForm'
 import DashboardView from '../views/DashboardView'
 import ProfileView from '../views/ProfileView'
 import SearchView from '../views/SearchView'
 
 const Dashboard = () => {
-    const location = useLocation()
-    const userDetails = location.state.loginDetails
 
     return (
         <BrowserRouter>
             <Switch>
                 <Route path="/dashboard">
-                    <DashboardView userDetails={userDetails} />
+                    <DashboardView />
                 </Route>
 
                 <Route path="/profile">
-                    <ProfileView userDetails={userDetails} />
+                    <ProfileView />
                 </Route>
 
                 <Route path="/search">
-                    <SearchView userDetails={userDetails} />
+                    <SearchView />
                 </Route>
 
                 <Route path="/logout">
