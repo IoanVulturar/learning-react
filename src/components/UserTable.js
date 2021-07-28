@@ -1,17 +1,14 @@
-import { useSelector } from 'react-redux'
-import TableRow from "./TableRow"
-import TableHeader from "./TableHeader"
+import TableHeader from './TableHeader'
+import TableRowContainer from './containers/TableRowContainer'
 
-export default function UserTable() {
-  const searchTerm = useSelector(state => state.searchTerm.value)
-  const usersList = useSelector(state => state.usersList.users)
+export default function UserTable({ searchTerm, usersList }) {
   
-  const filteredUsers = usersList.filter(user =>
-    user.userName.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredUsers = usersList.users.filter(user =>
+    user.userName.toLowerCase().includes(searchTerm.value.toLowerCase())
   )
   
   const rows = filteredUsers.map(user =>
-    <TableRow key={user.id} user={user} />
+    <TableRowContainer key={user.id} user={user} />
   )
   
   return (

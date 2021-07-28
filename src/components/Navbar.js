@@ -1,7 +1,6 @@
 import React from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import { loggingAction } from '../redux/actions/loggingActions'
 import { setUserDetailsAction } from '../redux/actions/userActions'
 
 const Navbar = () => {
@@ -11,7 +10,6 @@ const Navbar = () => {
 
     const onLogout = ()=>{
         localStorage.removeItem('jwt')
-        dispatch(loggingAction())
         dispatch(setUserDetailsAction({}))
         history.push('/')
     }

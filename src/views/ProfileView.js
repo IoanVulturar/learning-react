@@ -1,12 +1,12 @@
-import Navbar from '../components/Navbar'
-import Profile from '../components/Profile'
+import NavbarContainer from '../components/containers/NavbarContainer'
+import ProfileContainer from '../components/containers/ProfileContainer'
 
 export default function ProfileView() {
 
   return (
     <div>
-      <Navbar />
-      <Profile />
+      <NavbarContainer />
+      <ProfileContainer />
     </div>
   )
 }

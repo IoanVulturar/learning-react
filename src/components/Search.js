@@ -1,18 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { getUsers } from '../utils/requests'
-import UserTable from "./UserTable"
-import { useDispatch } from 'react-redux'
-import { setUsersListAction } from '../redux/actions/usersListAction'
-import { searchAction } from '../redux/actions/searchAction'
+import UserTableContainer from './containers/UserTableContainer'
 
-export default function Search() {
-    const [searchTerm, setSearchTerm] = useState('')
-    const dispatch = useDispatch()
+export default function Search({searchTerm, setSearchTerm, setUsersList}) {
 
     const initTableList = async () => {
         try {
-            const usersList = await getUsers()
-            dispatch(setUsersListAction(usersList))
+            const usersListDB = await getUsers()
+            setUsersList(usersListDB)
         } catch (err) {
             console.error('Show users error -> ' + err);
         }
@@ -25,7 +20,6 @@ export default function Search() {
     const onChangeHandler = (e) => {
         const term = e.target.value
         e.preventDefault()
-        dispatch(searchAction(term))
         setSearchTerm(term)
     }
 
@@ -40,10 +34,10 @@ export default function Search() {
                     placeholder='search...'
                     autoFocus
                     onChange={onChangeHandler}
-                    value={searchTerm}
+                    value={searchTerm.value}
                 />
             </div>
-            <UserTable />
+            <UserTableContainer />
         </div>
     )
 }
