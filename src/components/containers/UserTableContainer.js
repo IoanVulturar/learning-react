@@ -1,4 +1,3 @@
-import React from 'react'
 import { connect } from 'react-redux'
 import UserTable from '../UserTable'
 
@@ -9,12 +8,4 @@ const mapStateToProps = state => {
   }
 }
 
-const UserTableContainer = ({searchTerm, usersList}) => {
-  return (
-    <div>
-      <UserTable searchTerm={searchTerm} usersList={usersList} />
-    </div>
-  )
-}
-
-export default connect(mapStateToProps)(UserTableContainer)
+export default connect(mapStateToProps)(UserTable)

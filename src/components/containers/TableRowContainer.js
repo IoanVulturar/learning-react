@@ -1,4 +1,3 @@
-import React from 'react'
 import { connect } from 'react-redux'
 import TableRow from '../TableRow'
 import {setUsersListAction} from '../../redux/actions/usersListAction'
@@ -15,10 +14,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-const TableRowContainer = ({user, usersList, setUsersList}) => {
-  return (
-      <TableRow user={user} usersList={usersList} setUsersList={setUsersList} />
-  )
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(TableRowContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(TableRow)

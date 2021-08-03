@@ -1,4 +1,3 @@
-import React from 'react'
 import { connect } from 'react-redux'
 import Search from '../Search'
 import {searchAction} from '../../redux/actions/searchAction'
@@ -17,16 +16,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-const SearchContainer = ({searchTerm, setSearchTerm, setUsersList}) => {
-  return (
-    <div>
-      <Search 
-        searchTerm={searchTerm} 
-        setSearchTerm={setSearchTerm} 
-        setUsersList={setUsersList}
-      />
-    </div>
-  )
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(SearchContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(Search)

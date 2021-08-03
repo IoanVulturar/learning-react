@@ -1,4 +1,3 @@
-import React from 'react'
 import { connect } from 'react-redux'
 import Navbar from '../Navbar'
 
@@ -8,10 +7,4 @@ const mapStateToProps = state => {
   }
 }
 
-const NavbarContainer = ({ user }) => {
-  return (
-      <Navbar user={user} />
-  )
-}
-
-export default connect(mapStateToProps)(NavbarContainer)
+export default connect(mapStateToProps)(Navbar)

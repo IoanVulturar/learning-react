@@ -1,4 +1,3 @@
-import React from 'react'
 import { connect } from 'react-redux'
 import LoginForm from '../../views/LoginForm'
 import {setUserDetailsAction} from '../../redux/actions/userActions'
@@ -15,10 +14,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-const LoginFormContainer = ({ user, setUserDetails }) => {
-  return (
-      <LoginForm user={user} setUserDetails={setUserDetails}/>
-  )
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(LoginFormContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(LoginForm)
