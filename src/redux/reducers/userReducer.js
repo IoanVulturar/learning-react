@@ -1,3 +1,5 @@
+import { SET_USER_DETAILS } from '../action-types'
+
 const initialUserState = {
   id: '',
   userName: '',
@@ -9,7 +11,7 @@ const initialUserState = {
 
 const userReducer = (state = initialUserState, { type, payload }) => {
   switch (type) {
-    case 'setUserDetails':
+    case SET_USER_DETAILS:
       state = {
         ...state,
         id: payload._id,

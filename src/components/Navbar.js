@@ -1,16 +1,12 @@
 import React from 'react'
 import { Link, useHistory } from 'react-router-dom'
-import { useSelector, useDispatch } from 'react-redux'
-import { setUserDetailsAction } from '../redux/actions/userActions'
 
-const Navbar = () => {
-    const username = useSelector(state => state.user.userName)
+const Navbar = ({ user, setUserDetails }) => {
     const history = useHistory()
-    const dispatch = useDispatch()
 
     const onLogout = ()=>{
         localStorage.removeItem('jwt')
-        dispatch(setUserDetailsAction({}))
+        setUserDetails({})
         history.push('/')
     }
 
@@ -22,7 +18,7 @@ const Navbar = () => {
                 <ul className="navbar-nav ml-auto">
                     <li className="nav-item dropdown mr-3">
                         <a href="/" className="nav-link dropdown-toggle" data-toggle="dropdown">
-                            <i className="fas fa-user-circle"></i> {username}
+                            <i className="fas fa-user-circle"></i> {user.userName}
                         </a>
                         <div className="dropdown-menu">
                             <Link to="/profile" className="dropdown-item"><i className="far fa-id-card"></i> Profile</Link>

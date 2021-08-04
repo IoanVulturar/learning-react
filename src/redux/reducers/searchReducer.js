@@ -1,10 +1,12 @@
+import { SEARCH } from '../action-types'
+
 const initialState = {
   value: ''
 }
 
 const searchReducer = (state = initialState, {type, payload}) => {
   switch (type) {
-    case 'search':
+    case SEARCH:
       return {
         ...state,
         value: payload

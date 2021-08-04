@@ -1,6 +1,8 @@
+import { SET_USER_DETAILS } from '../action-types'
+
 export const setUserDetailsAction = (user) => {
   return {
-    type: 'setUserDetails',
+    type: SET_USER_DETAILS,
     payload: user,
   }
 }

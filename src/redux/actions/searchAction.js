@@ -1,6 +1,8 @@
+import { SEARCH } from '../action-types'
+
 export const searchAction = (term) => {
   return {
-    type: 'search',
+    type: SEARCH,
     payload: term
   }
 }

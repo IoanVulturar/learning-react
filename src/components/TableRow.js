@@ -1,11 +1,7 @@
 import React from "react"
-import { useDispatch, useSelector } from 'react-redux'
 import { deleteUser } from "../utils/requests";
-import { setUsersListAction } from '../redux/actions/usersListAction'
 
-export default function TableRow({ user }) {
-  const usersList = useSelector(state => state.usersList.users)
-  const dispatch = useDispatch()
+export default function TableRow({ user, usersList, setUsersList }) {
 
   const handleRemove = async (e) => {
     e.preventDefault()
@@ -17,7 +13,7 @@ export default function TableRow({ user }) {
     }
 
     const filteredList = usersList.filter(currentUser => currentUser.userName !== user.userName)
-    dispatch(setUsersListAction(filteredList))
+    setUsersList(filteredList)
   }
 
   return (
