@@ -1,11 +1,12 @@
 import React from 'react'
 import { Link, useHistory } from 'react-router-dom'
 
-const Navbar = ({ username }) => {
+const Navbar = ({ user, setUserDetails }) => {
     const history = useHistory()
 
     const onLogout = ()=>{
         localStorage.removeItem('jwt')
+        setUserDetails({})
         history.push('/')
     }
 
@@ -17,7 +18,7 @@ const Navbar = ({ username }) => {
                 <ul className="navbar-nav ml-auto">
                     <li className="nav-item dropdown mr-3">
                         <a href="/" className="nav-link dropdown-toggle" data-toggle="dropdown">
-                            <i className="fas fa-user-circle"></i> {username}
+                            <i className="fas fa-user-circle"></i> {user.userName}
                         </a>
                         <div className="dropdown-menu">
                             <Link to="/profile" className="dropdown-item"><i className="far fa-id-card"></i> Profile</Link>

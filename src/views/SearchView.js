@@ -1,12 +1,12 @@
-import Navbar from '../components/Navbar'
-import Search from '../components/Search'
+import NavbarContainer from '../components/containers/NavbarContainer'
+import SearchContainer from '../components/containers/SearchContainer'
 
-export default function SearchView({ userDetails }) {
+export default function SearchView() {
 
   return (
     <div>
-      <Navbar username={userDetails.userName} />
-      <Search />
+      <NavbarContainer />
+      <SearchContainer />
     </div>
   )
 }

@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import { updateUser } from '../utils/requests'
 
-export default function Profile({ userDetails }) {
+const Profile = ({user, setUserDetails}) => {
     const [userMessage, setUserMessage] = useState('')
-    const { _id, userName, password, email, phoneNumber, role } = userDetails
+    const { id, userName, password, email, phoneNumber, role } = user
     const [updateDetails, setUpdateDetails] = useState({
-        id: _id,
+        id,
         userName,
         password,
         email,
@@ -18,6 +18,7 @@ export default function Profile({ userDetails }) {
 
         try {
             await updateUser(updateDetails)
+            setUserDetails(updateDetails)
             setUserMessage('User profile has been updated!')
         } catch (err) {
             setUserMessage('Update details are not valid')
@@ -81,3 +82,5 @@ export default function Profile({ userDetails }) {
         </div >
     )
 }
+
+export default Profile

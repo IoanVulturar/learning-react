@@ -1,7 +1,7 @@
 import React from "react"
 import { deleteUser } from "../utils/requests";
 
-export default function TableRow({ user, userList, removeUser }) {
+export default function TableRow({ user, usersList, setUsersList }) {
 
   const handleRemove = async (e) => {
     e.preventDefault()
@@ -12,8 +12,8 @@ export default function TableRow({ user, userList, removeUser }) {
       console.error('DELETE user error -> ' + err);
     }
 
-    const filteredUsers = userList.filter(currentUser => currentUser.userName !== user.userName)
-    removeUser(filteredUsers)
+    const filteredList = usersList.filter(currentUser => currentUser.userName !== user.userName)
+    setUsersList(filteredList)
   }
 
   return (

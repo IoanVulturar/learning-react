@@ -1,12 +1,12 @@
-import Navbar from '../components/Navbar'
-import Welcome from '../components/Welcome'
+import NavbarContainer from '../components/containers/NavbarContainer'
+import WelcomeContainer from '../components/containers/WelcomeContainer'
 
-export default function DashboardView({ userDetails }) {
+export default function DashboardView() {
 
   return (
     <div>
-      <Navbar username={userDetails.userName} />
-      <Welcome username={userDetails.userName} />
+      <NavbarContainer />
+      <WelcomeContainer />
     </div>
   )
 }

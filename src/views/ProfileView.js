@@ -1,12 +1,12 @@
-import Navbar from '../components/Navbar'
-import Profile from '../components/Profile'
+import NavbarContainer from '../components/containers/NavbarContainer'
+import ProfileContainer from '../components/containers/ProfileContainer'
 
-export default function ProfileView({ userDetails }) {
+export default function ProfileView() {
 
   return (
     <div>
-      <Navbar username={userDetails.userName} />
-      <Profile userDetails={userDetails} />
+      <NavbarContainer />
+      <ProfileContainer />
     </div>
   )
 }

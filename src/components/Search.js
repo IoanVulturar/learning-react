@@ -1,33 +1,26 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { getUsers } from '../utils/requests'
-import UserTable from "./UserTable"
+import UserTableContainer from './containers/UserTableContainer'
 
-export default function Search() {
-    const [searchTerm, setSearchTerm] = useState('')
-    const [userList, setUserList] = useState([])
+export default function Search({searchTerm, setSearchTerm, setUsersList}) {
 
-    const initTable = async () => {
+    const initTableList = async () => {
         try {
-            const users = await getUsers()
-            setUserList(users)
+            const usersListDB = await getUsers()
+            setUsersList(usersListDB)
         } catch (err) {
             console.error('Show users error -> ' + err);
         }
     }
-
+    
     useEffect(() => {
-        initTable()
+        initTableList()
     }, [])
 
-    const getFilteredList = () => {
-        return userList.filter(user =>
-            user.userName.toLowerCase().includes(searchTerm.toLowerCase())
-        )
-    }
-
     const onChangeHandler = (e) => {
+        const term = e.target.value
         e.preventDefault()
-        setSearchTerm(e.target.value)
+        setSearchTerm(term)
     }
 
     return (
@@ -41,10 +34,10 @@ export default function Search() {
                     placeholder='search...'
                     autoFocus
                     onChange={onChangeHandler}
-                    value={searchTerm}
+                    value={searchTerm.value}
                 />
             </div>
-            <UserTable userList={userList} showUsers={getFilteredList()} removeUser={setUserList} />
+            <UserTableContainer />
         </div>
     )
 }

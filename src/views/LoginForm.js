@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import { isUserValid } from '../utils/authentication'
 
-export default function LoginForm() {
+export default function LoginForm({setUserDetails}) {
 	const [error, setError] = useState('')
 	const history = useHistory()
 	const [loginDetails, setLoginDetails] = useState({
@@ -14,9 +14,10 @@ export default function LoginForm() {
 		e.preventDefault()
 
 		try {
-			const isValid = await isUserValid(loginDetails)
-			if (isValid) {
-				history.push({ pathname: "/dashboard", state: { loginDetails: isValid } })
+			const userDB = await isUserValid(loginDetails)
+			if (userDB) {
+				setUserDetails(userDB)
+				history.push('/dashboard')
 			} else {
 				setError('INVALID CREDENTIALS')
 			}

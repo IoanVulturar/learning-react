@@ -2,7 +2,7 @@ import React from 'react'
 import { Switch, Route } from 'react-router-dom'
 import '../css/style.css'
 
-import LoginForm from '../views/LoginForm'
+import LoginFormContainer from './containers/LoginFormContainer'
 import RegisterForm from '../views/RegisterForm';
 import Dashboard from './Dashboard'
 import NotFound from '../views/NotFound'
@@ -13,7 +13,7 @@ export default function App() {
     return (
         <Switch>
             <Route path="/" exact>
-                <LoginForm />
+                <LoginFormContainer />
             </Route>
             <Route path="/register">
                 <RegisterForm />
